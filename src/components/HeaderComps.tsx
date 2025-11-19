@@ -21,8 +21,8 @@ export function NavButton({ to, end = false, children }: NavButtonProps) {
     <NavLink to={to} end={end}
       className={({ isActive }) =>
         isActive
-          ? "px-5 py-3 rounded-lg text-slate-200 bg-cyan-600 shadow-md transition"
-          : "px-5 py-3 rounded-lg text-slate-600 hover:text-slate-950 transition"
+          ? "px-5 py-2.5 rounded-lg text-slate-200 bg-cyan-600 shadow-md transition"
+          : "px-5 py-2.5 rounded-lg text-slate-600 hover:text-slate-950 transition"
       }
     >
       {children}

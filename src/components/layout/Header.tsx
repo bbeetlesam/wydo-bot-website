@@ -1,33 +1,26 @@
-import type React from 'react';
-import { NavLink, type NavLinkProps } from 'react-router-dom';
+import { useState } from 'react';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-type NavButtonProps = {
-  to: NavLinkProps["to"]
-  end?: boolean
-  children: React.ReactNode
-}
-
-function NavButton({ to, end = false, children }: NavButtonProps) {
-  return (
-    <NavLink to={to} end={end}
-      className={({ isActive }) =>
-        isActive
-          ? "px-5 py-3 rounded-lg text-slate-200 bg-cyan-600 shadow-md transition"
-          : "px-5 py-3 rounded-lg text-slate-600 hover:text-slate-950 transition"
-      }
-    >
-      {children}
-    </NavLink>
-  )
-}
+import { NavButton, IconButton } from '../HeaderComps';
 
 function Header() {
+  const [theme, setTheme] = useState<"light" | "dark">("light")
+  const [lang, setLang] = useState<"id" | "en">("id")
+
+  function toggleTheme() {
+    setTheme(t => t === "light" ? "dark" : "light")
+    // future: add document.documentElement.classList toggle etc.
+  }
+
+  function toggleLang() {
+    setLang(l => l === "id" ? "en" : "id")
+    // future: integrate translation logic
+  }
+
   return (
     <header className="font-medium">
       <section className="flex items-center justify-between px-0 py-7 w-full">
-        {/* left header */}
+        {/* left: WYDO homepage */}
         <div className="">
           <span className="text-xl bg-cyan-600">WYDO</span>
         </div>
@@ -36,23 +29,32 @@ function Header() {
         <div>
           <nav>
             <ul className="flex gap-6">
-              <li>
-                <NavButton to="/" end>Home</NavButton>
-              </li>
-              <li>
-                <NavButton to="/predict">Predict!</NavButton>
-              </li>
-              <li>
-                <NavButton to="/about">About</NavButton>
-              </li>
+              <li><NavButton to="/" end>Home</NavButton></li>
+              <li><NavButton to="/predict">Predict!</NavButton></li>
+              <li><NavButton to="/about">About</NavButton></li>
             </ul>
           </nav>
         </div>
 
-        {/* right header */}
-        <div className="">
-          <FontAwesomeIcon icon={faMoon}></FontAwesomeIcon>
-          <FontAwesomeIcon icon={faSun}></FontAwesomeIcon>
+        {/* right: theme and lang toggles */}
+        <div className="flex gap-1 text-xl">
+          <IconButton
+            onClick={toggleLang}
+            ariaLabel={`Switch language to ${lang === "id" ? "English" : "Bahasa Indonesia"}`}
+            title="Toggle language"
+          >
+            <span className="font-extrabold">
+              {lang.toUpperCase()}
+            </span>
+          </IconButton>
+
+          <IconButton
+            onClick={toggleTheme}
+            ariaLabel={`Switch theme to ${theme === "light" ? "dark" : "light"} mode`}
+            title="Toggle theme"
+          >
+            <FontAwesomeIcon icon={theme === "light" ? faMoon : faSun} />
+          </IconButton>
         </div>
       </section>
     </header>

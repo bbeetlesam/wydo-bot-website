@@ -15,6 +15,10 @@ export const TEXT = {
         subhero: "Alat santai yang bantu kamu lihat apakah kamu lagi aman atau mulai oleng.",
         heroBtn: "Coba prediksi",
       },
+      predict: {
+        head: "Prediksi Status Semester Depan",
+        subhead: "*Gratis, anonim, dan tidak akan mengambil data kamu (dan juga mengkritik nilaimu).",
+      }
     },
   },
 
@@ -32,6 +36,10 @@ export const TEXT = {
         subhero: "A chill little tool that helps you figure out whether you’re cruising or crashing.",
         heroBtn: "Try to predict",
       },
+      predict: {
+        head: "Predict Next Semester's Status",
+        subhead: "*Free, anonymous, and won't take your data (and roast your GPA too).",
+      }
     },
   }
 } as const

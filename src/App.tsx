@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header'
 import Home from './components/layout/Home'
+import PredictPage from './components/layout/PredictPage';
 import { LangProvider } from './context/LangContext';
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
         <div className="px-4">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/predict" element={<Home />} />
+            <Route path="/predict" element={<PredictPage />} />
             <Route path="/about" element={<Home />} />
           </Routes>
         </div>

@@ -8,7 +8,9 @@ type FeatArticleProps = {
 
 function FeatureArticle({ img, alt, h3, text }: FeatArticleProps) {
   return (
-    <article className="flex gap-6">
+    <article className="flex gap-4 items-start
+      rounded-xl bg-white/50 shadow-sm shadow-slate-100 px-4 py-4 hover:shadow-md hover:bg-white transition"
+    >
       <div className="flex-shrink-0 w-20 sm:w-32 lg:w-48" style={{ aspectRatio: "1/1" }}>
         <img src={img} alt={alt} loading="lazy"
           className="w-full h-full rounded-md object-cover"
@@ -50,15 +52,13 @@ function Home() {
             <Link
               to="/predict"
               className="inline-block px-6 py-2.5 bg-cyan-600 text-white rounded-full hover:bg-cyan-700 transition"
-            >
-              {t.page.home.heros.heroBtn}
+            > {t.page.home.heros.heroBtn}
             </Link>
 
             <Link
               to="/about"
               className="inline-block px-6 py-2.5 rounded-full border border-cyan-600 text-cyan-700 hover:bg-cyan-50 transition"
-            >
-              {t.page.home.heros.secondBtn}
+            > {t.page.home.heros.secondBtn}
             </Link>
           </div>
 
@@ -70,31 +70,34 @@ function Home() {
       </section>
 
       {/* features? */}
-      <section className="flex flex-col items-center justify-center gap-10">
-        <h2 className="text-4xl font-bold">{t.page.home.featHeadline}</h2>
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto flex flex-col gap-10 px-4">
+          {/* heading + intro */}
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-800">
+              {t.page.home.featHeadline}
+            </h2>
+          </div>
 
-        {/* articles section, ha */}
-        <div className="flex flex-col gap-8">
-          {/* article 1 */}
-          <FeatureArticle
-            img={testimg} alt="a drowmed ear" h3="Predict. Simple. Fast"
-            text="">
-          </FeatureArticle>
-          {/* article 2 */}
-          <FeatureArticle
-            img={testimg} alt="a drowmed ear" h3="meddle"
-            text="pink floyd">
-          </FeatureArticle>
-          {/* article 3 */}
-          <FeatureArticle
-            img={testimg} alt="a drowmed ear" h3="one of these days"
-            text="im gonna cut you into little pieces">
-          </FeatureArticle>
-          {/* article 4 */}
-          <FeatureArticle
-            img={testimg} alt="a drowmed ear" h3="willowing across the sand"
-            text="and everything is green and submarine">
-          </FeatureArticle>
+          {/* feature list */}
+          <div className="flex flex-col gap-8">
+            <FeatureArticle
+              img={testimg} alt="placeholder"
+              h3={t.page.home.feature.first} text={t.page.home.feature.first2}
+            />
+            <FeatureArticle
+              img={testimg} alt="placeholder"
+              h3={t.page.home.feature.second} text={t.page.home.feature.second2}
+            />
+            <FeatureArticle
+              img={testimg} alt="placeholder"
+              h3={t.page.home.feature.third} text={t.page.home.feature.third2}
+            />
+            <FeatureArticle
+              img={testimg} alt="placeholder"
+              h3={t.page.home.feature.fourth} text={t.page.home.feature.fourth2}
+            />
+          </div>
         </div>
       </section>
     </main>

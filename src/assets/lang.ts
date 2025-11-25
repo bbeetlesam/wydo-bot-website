@@ -12,9 +12,14 @@ export const TEXT = {
     page: {
       home: {
         hero: "Khawatir soal semester depan kamu? Ayo cek.",
-        subhero: "Alat bantu santai yang bantu kamu lihat apakah kamu lagi aman atau mulai hilang arah.",
-        heroBtn: "Coba prediksi",
-        featHeadline: "Bisa selamatkan karir kuliah kamu"
+        subhero: "Alat bantu santai yang bantu kamu lihat apakah kamu lagi aman atau nggak.",
+        heros: {
+          badge: "Bagi mahasiswa yang khawatir",
+          heroBtn: "Coba prediksi",
+          secondBtn: "Cara dia bekerja",
+          smallNote: "Cuma satu menit. Tanpa login, tanpa kritikan."
+        },
+        featHeadline: "Amankan karir kuliah kamu"
       },
       predict: {
         head: "Prediksi Status Semester Depan",
@@ -35,8 +40,13 @@ export const TEXT = {
       home: {
         hero: "Worried about your next semester? Let's check.",
         subhero: "A chill little tool that helps you figure out whether you’re cruising or crashing.",
-        heroBtn: "Try to predict",
-        featHeadline: "May save your college career"
+        heros: {
+          badge: "For overwhelmed students",
+          heroBtn: "Try to predict",
+          secondBtn: "How it works",
+          smallNote: "Takes under a minute. No login, no judgement."
+        },
+        featHeadline: "Secure your college career",
       },
       predict: {
         head: "Predict Next Semester's Status",

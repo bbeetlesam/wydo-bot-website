@@ -10,7 +10,7 @@ export const TEXT = {
       about: "Tentang"
     },
     footer: {
-      tagline: "Alat prediksi nilai sederhana yang dibuat untuk proyek kelompok Matematika Diskrit. Dirancang supaya siapa pun bisa cek gambaran semester mereka tanpa stres.",
+      tagline: "Alat prediksi nilai sederhana yang dibuat untuk proyek kelompok Matematika Diskrit. Dirancang agar siapa pun bisa cek gambaran semester mereka dengan mudah.",
       bottom: "WYDO. Dikembangkan oleh tim proyek Matematika Diskrit.",
     },
     page: {
@@ -74,7 +74,7 @@ export const TEXT = {
       about: "About"
     },
     footer: {
-      tagline: "A small grade-prediction tool built for a Discrete Math group project. Designed so any student can check their semester outlook without stress.",
+      tagline: "A small grade-prediction tool built for a Discrete Math group project. Designed so any student can check their semester outlook with ease.",
       bottom: "WYDO. Developed by the Discrete Math project team.",
     },
     page: {

@@ -23,8 +23,10 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 font-medium bg-slate-100 shadow-sm">
       <section className="flex items-center justify-between px-16 py-3 w-full">
         {/* left: WYDO homepage */}
-        <div className="">
-          <span className="px-2 py-1 text-xl text-emerald-100 bg-cyan-600"><NavLink to="/">WYDO</NavLink></span>
+        <div className="flex items-center px-4 py-0">
+          <NavLink to="/">
+            <img src="/icon.png" alt="Homepage" className="h-12 w-auto" />
+          </NavLink>
         </div>
 
         {/* centre: navlinks */}

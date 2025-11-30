@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavButton, IconButton } from '../HeaderComps';
 import { useLang } from '../../context/LangContext';
 
+// need xl: or 1280 min width for dropdown header
+
 function Header() {
   /*
    *  t = language's texts list/table
@@ -21,11 +23,11 @@ function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 font-medium bg-slate-100 shadow-sm">
-      <section className="flex items-center justify-between px-16 py-3 w-full">
+      <section className="flex items-center justify-between py-3 w-full px-1 md:px-6 lg:px-14 xl:px-32">
         {/* left: WYDO homepage */}
         <div className="flex items-center px-4 py-0">
           <NavLink to="/">
-            <img src="/icon.png" alt="Homepage" className="h-12 w-auto" />
+            <img src="/icon.png" alt="WYDO Icon" aria-label="Go to homepage" className="h-10 w-auto" />
           </NavLink>
         </div>
 

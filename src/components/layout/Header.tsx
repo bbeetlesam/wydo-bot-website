@@ -82,7 +82,7 @@ function Header() {
             <IconButton
               onClick={() => setMenuOpen(!isMenuOpen)}
               ariaLabel={isMenuOpen ? "Close dropdown menu" : "Open dropdown menu"}
-              className="px-2"
+              className="px-3"
             >
               <FontAwesomeIcon icon={faBars} size="xl" />
             </IconButton>
@@ -93,12 +93,57 @@ function Header() {
       {/* mobile dropdown overlay (opened with hamburger, on mobile) */}
       <div
         className={`
-          fixed inset-0 z-40 bg-slate-100 md:hidden transform transition-transform duration-200 ease-out
+          fixed inset-0 z-40 bg-slate-100 md:hidden transform transition-transform duration-300 ease-in-out
           ${isMenuOpen ? "translate-y-0 pointer-events-auto" : "-translate-y-full pointer-events-none"}
         `}
       >
-        <div className="pt-[64px]">
-          timeistickingandiwanttoburymyselfinthedepthsofafrica
+        <div className="pt-[3.65rem] px-4 flex flex-col">
+          {/* navlinks */}
+          <nav className="flex flex-col border-slate-200 divide-y divide-slate-200">
+            <NavLink
+              to="/" end onClick={() => setMenuOpen(false)} className={({ isActive }) =>
+                `block w-full text-left px-4 py-3 text-base
+                ${isActive ? "text-cyan-700 font-semibold" : "text-slate-700 hover:text-slate-950"}`
+              }
+            > {t.header.home}
+            </NavLink>
+
+            <NavLink
+              to="/predict" end onClick={() => setMenuOpen(false)} className={({ isActive }) =>
+                `block w-full text-left px-4 py-3 text-base
+                ${isActive ? "text-cyan-700 font-semibold" : "text-slate-700 hover:text-slate-950"}`
+              }
+            > {t.header.predict}
+            </NavLink>
+
+            <NavLink
+              to="/about" end onClick={() => setMenuOpen(false)} className={({ isActive }) =>
+                `block w-full text-left px-4 py-3 text-base
+                ${isActive ? "text-cyan-700 font-semibold" : "text-slate-700 hover:text-slate-950"}`
+              }
+            > {t.header.about}
+            </NavLink>
+          </nav>
+
+          {/* theme and lang toggles */}
+          <div className="mt-auto pt-5 border-t border-slate-200 flex items-center justify-center gap-4">
+            <button
+              type="button"
+              onClick={toggleLang}
+              className="px-4 py-1.5 rounded-full border border-slate-300 text-xs font-semibold text-slate-700"
+            >
+              {t.name}
+            </button>
+
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="px-4 py-1.5 rounded-full border border-slate-300 text-xs font-semibold text-slate-700 flex items-center gap-2"
+            >
+              <FontAwesomeIcon icon={theme === "light" ? faMoon : faSun} />
+              <span>{theme === "light" ? "Dark" : "Light"}</span>
+            </button>
+          </div>
         </div>
       </div>
     </>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { faMoon, faSun, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faMoon, faSun, faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavButton, IconButton } from '../HeaderComps';
 import { useLang } from '../../context/LangContext';
@@ -84,7 +84,8 @@ function Header() {
               ariaLabel={isMenuOpen ? "Close dropdown menu" : "Open dropdown menu"}
               className="px-3"
             >
-              <FontAwesomeIcon icon={faBars} size="xl" />
+              <FontAwesomeIcon icon={isMenuOpen ? faXmark : faBars} size="xl"
+                className={`transition-transform duration-300 ${isMenuOpen ? "rotate-90" : "rotate-0"}`} />
             </IconButton>
           </div>
         </section>
@@ -102,24 +103,24 @@ function Header() {
           <nav className="flex flex-col border-slate-200 divide-y divide-slate-200">
             <NavLink
               to="/" end onClick={() => setMenuOpen(false)} className={({ isActive }) =>
-                `block w-full text-left px-4 py-3 text-base
-                ${isActive ? "text-cyan-700 font-semibold" : "text-slate-700 hover:text-slate-950"}`
+                `block w-full text-left px-2 py-3 text-base
+                ${isActive ? "text-cyan-700 font-bold" : "text-slate-700 hover:text-slate-950"}`
               }
             > {t.header.home}
             </NavLink>
 
             <NavLink
               to="/predict" end onClick={() => setMenuOpen(false)} className={({ isActive }) =>
-                `block w-full text-left px-4 py-3 text-base
-                ${isActive ? "text-cyan-700 font-semibold" : "text-slate-700 hover:text-slate-950"}`
+                `block w-full text-left px-2 py-3 text-base
+                ${isActive ? "text-cyan-700 font-bold" : "text-slate-700 hover:text-slate-950"}`
               }
             > {t.header.predict}
             </NavLink>
 
             <NavLink
               to="/about" end onClick={() => setMenuOpen(false)} className={({ isActive }) =>
-                `block w-full text-left px-4 py-3 text-base
-                ${isActive ? "text-cyan-700 font-semibold" : "text-slate-700 hover:text-slate-950"}`
+                `block w-full text-left px-2 py-3 text-base
+                ${isActive ? "text-cyan-700 font-bold" : "text-slate-700 hover:text-slate-950"}`
               }
             > {t.header.about}
             </NavLink>

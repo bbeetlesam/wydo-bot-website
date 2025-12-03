@@ -37,7 +37,7 @@ function PredictPage() {
     setForm(prev => ({ ...prev, [key]: value }));
   };
 
-  cconst handlePredict = async () => {
+  const handlePredict = async () => {
   const payload = {
     age: form.age,
     gender: "L",
@@ -216,7 +216,7 @@ function PredictPage() {
               </label>
             </div>
 
-            {/* submit */}
+            {/* submit */} 
             <button
               onClick={handlePredict}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"

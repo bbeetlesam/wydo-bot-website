@@ -1,5 +1,4 @@
 import { useState } from "react";
-//import { useLang } from "../../context/LangContext";
 
 type Form = {
   age: number;
@@ -11,7 +10,7 @@ type Form = {
   totalSem2: number;
   passedSem2: number;
   gpaSem2: number;
-}
+};
 
 const initForm: Form = {
   age: 17,
@@ -23,34 +22,105 @@ const initForm: Form = {
   totalSem2: 8,
   passedSem2: 8,
   gpaSem2: 3.5
-}
+};
+
+// =========================
+//  URL BACKEND FLASK
+// =========================
+const API_URL = "https://mustofa.pythonanywhere.com/api/predict";
 
 function PredictPage() {
   const [form, setForm] = useState<Form>(initForm);
+  const [result, setResult] = useState<any>(null);
 
   const update = (key: keyof Form, value: any) => {
     setForm(prev => ({ ...prev, [key]: value }));
   };
 
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await fetch("https://mustofa.pythonanywhere.com/api/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
+    const data = await res.json();
+
+    // 🔥 Jika backend kirim warning
+    if (data.status === "warning" || data.status === "error") {
+      alert(data.message);
+      return;
+    }
+
+    // 🔥 Jika sukses
+    alert(`Probabilitas: ${data.prob}\nKategori: ${data.kategori}`);
+
+  } catch (err) {
+    alert("Terjadi error saat memproses data.");
+  }
+};
+
+
+
+  // ==========================================
+  //  HANDLE PREDICT (FETCH KE FLASK)
+  // ==========================================
+  const handlePredict = async () => {
+    const payload = {
+      age: form.age,
+      gender: "L", // sementara, nanti bisa ditambah ke form
+
+      scholar: form.isScholarship ? 1 : 0,
+      debtor: form.isDebtor ? 1 : 0,
+
+      mk1: form.totalSem1,
+      c1_approved: form.passedSem1,
+      c1_grade: form.gpaSem1,
+
+      mk2: form.totalSem2,
+      c2_approved: form.passedSem2,
+      c2_grade: form.gpaSem2
+    };
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+      setResult(data);
+      console.log("Hasil prediksi:", data);
+    } catch (error) {
+      console.error("Gagal fetch:", error);
+      setResult({ error: "Tidak dapat terhubung ke server." });
+    }
+  };
+
   return (
-    <main className=" mt-[100px] mb-14">
+    <main className="mt-[100px] mb-14">
       <section className="w-full flex flex-col items-center mx-auto space-y-10">
+        
         {/* hero */}
         <div className="text-center space-y-3">
           <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">
-            Prediksi Resiko Drop Out
+            Prediksi Risiko Drop Out
           </h1>
           <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto">
             Masukkan data akademik dua semester terakhir untuk memprediksi tingkat risiko DO.
-            (Untuk mahasiswa semester 1, cukup isi dua semester dengan nilai yang sama)
           </p>
         </div>
 
-        {/* main card */}
         <section className="w-full max-w-4xl flex flex-col lg:flex-row gap-3">
+
           {/* input card */}
           <article className="w-full max-w-2xl bg-white shadow-md rounded-lg p-6 space-y-6">
-            {/* age */}
+
+            {/* usia */}
             <div>
               <label className="block font-semibold mb-1">Usia</label>
               <input
@@ -63,7 +133,7 @@ function PredictPage() {
               />
             </div>
 
-            {/* Semester 1 Card */}
+            {/* semester 1 */}
             <div className="border rounded-lg p-4 space-y-4 bg-gray-50">
               <h2 className="font-semibold text-lg">Semester 1</h2>
 
@@ -80,7 +150,7 @@ function PredictPage() {
               </div>
 
               <div>
-                <label className="block mb-1">Mata Kuliah Lulus</label>
+                <label className="block mb-1">Lulus</label>
                 <input
                   type="number"
                   min={0}
@@ -95,9 +165,9 @@ function PredictPage() {
                 <label className="block mb-1">IP Semester</label>
                 <input
                   type="number"
-                  step={0.01}
                   min={0}
                   max={4}
+                  step={0.01}
                   value={form.gpaSem1}
                   onChange={e => update("gpaSem1", Number(e.target.value))}
                   className="w-full border rounded px-3 py-2 bg-white"
@@ -105,7 +175,7 @@ function PredictPage() {
               </div>
             </div>
 
-            {/* Semester 2 Card */}
+            {/* semester 2 */}
             <div className="border rounded-lg p-4 space-y-4 bg-gray-50">
               <h2 className="font-semibold text-lg">Semester 2</h2>
 
@@ -122,7 +192,7 @@ function PredictPage() {
               </div>
 
               <div>
-                <label className="block mb-1">Mata Kuliah Lulus</label>
+                <label className="block mb-1">Lulus</label>
                 <input
                   type="number"
                   min={0}
@@ -137,9 +207,9 @@ function PredictPage() {
                 <label className="block mb-1">IP Semester</label>
                 <input
                   type="number"
-                  step={0.01}
                   min={0}
                   max={4}
+                  step={0.01}
                   value={form.gpaSem2}
                   onChange={e => update("gpaSem2", Number(e.target.value))}
                   className="w-full border rounded px-3 py-2 bg-white"
@@ -147,7 +217,7 @@ function PredictPage() {
               </div>
             </div>
 
-            {/* Scholarship + Debtor */}
+            {/* scholarship + debtor */}
             <div className="flex items-center gap-6">
               <label className="flex items-center gap-2">
                 <input
@@ -168,16 +238,29 @@ function PredictPage() {
               </label>
             </div>
 
-            {/* Submit */}
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">
+            {/* submit */}
+            <button
+              onClick={handlePredict}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
+            >
               Prediksi!
             </button>
           </article>
 
-          {/* result card */}
+          {/* hasil */}
           <article className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
             <p className="uppercase font-semibold tracking-wide">Hasil Prediksi</p>
+
+            {result ? (
+              <div className="mt-4 space-y-2">
+                <p><b>Probabilitas:</b> {result.prob ?? "-"}</p>
+                <p><b>Kategori:</b> {result.kategori ?? "-"}</p>
+              </div>
+            ) : (
+              <p className="text-slate-500 mt-4">Belum ada hasil.</p>
+            )}
           </article>
+
         </section>
       </section>
     </main>

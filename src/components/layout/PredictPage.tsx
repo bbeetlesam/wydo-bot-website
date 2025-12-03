@@ -41,7 +41,6 @@ function PredictPage() {
   const payload = {
     age: form.age,
     gender: "L",
-
     scholar: form.isScholarship ? 1 : 0,
     debtor: form.isDebtor ? 1 : 0,
 
@@ -61,15 +60,16 @@ function PredictPage() {
       body: JSON.stringify(payload)
     });
 
-    const data = await res.json();
-
-    // ⚠️ Warning atau Error dari backend → tampilkan alert
-    if (data.status === "warning" || data.status === "error") {
-      alert(data.message);
-      return;
+    
+    if (!res.ok) {
+      const err = await res.json();   // ambil pesan error dari backend
+      alert(err.message);             // tampilkan ke user
+      return;                         // jangan lanjut ke proses sukses
     }
 
-    // ✔️ Jika sukses
+    
+    const data = await res.json();
+
     alert(`Probabilitas: ${data.prob}\nKategori: ${data.kategori}`);
     setResult(data);
 
@@ -77,6 +77,7 @@ function PredictPage() {
     alert("Tidak dapat terhubung ke server.");
   }
 };
+
 
 
   return (

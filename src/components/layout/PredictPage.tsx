@@ -37,69 +37,47 @@ function PredictPage() {
     setForm(prev => ({ ...prev, [key]: value }));
   };
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
+  cconst handlePredict = async () => {
+  const payload = {
+    age: form.age,
+    gender: "L",
+
+    scholar: form.isScholarship ? 1 : 0,
+    debtor: form.isDebtor ? 1 : 0,
+
+    mk1: form.totalSem1,
+    c1_approved: form.passedSem1,
+    c1_grade: form.gpaSem1,
+
+    mk2: form.totalSem2,
+    c2_approved: form.passedSem2,
+    c2_grade: form.gpaSem2
+  };
 
   try {
-    const res = await fetch("https://mustofa.pythonanywhere.com/api/predict", {
+    const res = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify(payload)
     });
 
     const data = await res.json();
 
-    // 🔥 Jika backend kirim warning
+    // ⚠️ Warning atau Error dari backend → tampilkan alert
     if (data.status === "warning" || data.status === "error") {
       alert(data.message);
       return;
     }
 
-    // 🔥 Jika sukses
+    // ✔️ Jika sukses
     alert(`Probabilitas: ${data.prob}\nKategori: ${data.kategori}`);
+    setResult(data);
 
-  } catch (err) {
-    alert("Terjadi error saat memproses data.");
+  } catch (error) {
+    alert("Tidak dapat terhubung ke server.");
   }
 };
 
-
-
-  // ==========================================
-  //  HANDLE PREDICT (FETCH KE FLASK)
-  // ==========================================
-  const handlePredict = async () => {
-    const payload = {
-      age: form.age,
-      gender: "L", // sementara, nanti bisa ditambah ke form
-
-      scholar: form.isScholarship ? 1 : 0,
-      debtor: form.isDebtor ? 1 : 0,
-
-      mk1: form.totalSem1,
-      c1_approved: form.passedSem1,
-      c1_grade: form.gpaSem1,
-
-      mk2: form.totalSem2,
-      c2_approved: form.passedSem2,
-      c2_grade: form.gpaSem2
-    };
-
-    try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await res.json();
-      setResult(data);
-      console.log("Hasil prediksi:", data);
-    } catch (error) {
-      console.error("Gagal fetch:", error);
-      setResult({ error: "Tidak dapat terhubung ke server." });
-    }
-  };
 
   return (
     <main className="mt-[100px] mb-14">

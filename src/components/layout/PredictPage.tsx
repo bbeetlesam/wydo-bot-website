@@ -24,9 +24,7 @@ const initForm: Form = {
   gpaSem2: 3.5
 };
 
-// =========================
-//  URL BACKEND FLASK
-// =========================
+// url backend flask
 const API_URL = "https://mustofa.pythonanywhere.com/api/predict";
 
 function PredictPage() {
@@ -34,58 +32,54 @@ function PredictPage() {
   const [result, setResult] = useState<any>(null);
   const [warning, setWarning] = useState<string | null>(null);
 
-
   const update = (key: keyof Form, value: any) => {
     setForm(prev => ({ ...prev, [key]: value }));
   };
 
   const handlePredict = async () => {
-  const payload = {
-    age: form.age,
-    gender: "L",
-    scholar: form.isScholarship ? 1 : 0,
-    debtor: form.isDebtor ? 1 : 0,
+    const payload = {
+      age: form.age,
+      gender: "L",
+      scholar: form.isScholarship ? 1 : 0,
+      debtor: form.isDebtor ? 1 : 0,
 
-    mk1: form.totalSem1,
-    c1_approved: form.passedSem1,
-    c1_grade: form.gpaSem1,
+      mk1: form.totalSem1,
+      c1_approved: form.passedSem1,
+      c1_grade: form.gpaSem1,
 
-    mk2: form.totalSem2,
-    c2_approved: form.passedSem2,
-    c2_grade: form.gpaSem2
-  };
+      mk2: form.totalSem2,
+      c2_approved: form.passedSem2,
+      c2_grade: form.gpaSem2
+    };
 
-  try {
-    const res = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
 
-    // Error dari backend → tampilkan warning
-    if (!res.ok) {
-      const err = await res.json();
-      setWarning(err.message);
-      setResult(null);
-      return;
+      // Error dari backend → tampilkan warning
+      if (!res.ok) {
+        const err = await res.json();
+        setWarning(err.message);
+        setResult(null);
+        return;
+      }
+
+      const data = await res.json();
+      setWarning(null);
+      setResult(data);
+
+    } catch (error) {
+      setWarning("Tidak dapat terhubung ke server.");
     }
-
-    const data = await res.json();
-    setWarning(null);
-    setResult(data);
-
-  } catch (error) {
-    setWarning("Tidak dapat terhubung ke server.");
-  }
-};
-
-
-
+  };
 
   return (
     <main className="mt-[100px] mb-14">
       <section className="w-full flex flex-col items-center mx-auto space-y-10">
-        
+
         {/* hero */}
         <div className="text-center space-y-3">
           <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">
@@ -219,7 +213,7 @@ function PredictPage() {
               </label>
             </div>
 
-            {/* submit */} 
+            {/* submit */}
             <button
               onClick={handlePredict}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
@@ -229,10 +223,10 @@ function PredictPage() {
           </article>
 
           {warning && (
-  <div className="mt-3 p-3 bg-red-100 text-red-700 rounded border border-red-300">
-    {warning}
-  </div>
-)}
+            <div className="mt-3 p-3 bg-red-100 text-red-700 rounded border border-red-300">
+              {warning}
+            </div>
+          )}
 
           {/* hasil */}
           <article className="w-full max-w-md bg-white shadow-md rounded-lg p-6">

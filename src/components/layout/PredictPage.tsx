@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { type Form, SemesterCard } from "../PredictPageComps";
+import { useLang } from "../../context/LangContext";
 
 const initForm: Form = {
   age: 17,
@@ -21,6 +22,7 @@ function PredictPage() {
   const [form, setForm] = useState<Form>(initForm);
   const [result, setResult] = useState<any>(null);
   const [warning, setWarning] = useState<string | null>(null);
+  const { t } = useLang()
 
   const update = (key: keyof Form, value: any) => {
     setForm(prev => ({ ...prev, [key]: value }));
@@ -73,10 +75,10 @@ function PredictPage() {
         {/* hero */}
         <div className="text-center space-y-3">
           <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">
-            Prediksi Risiko Drop Out
+            {t.page.predict.head}
           </h1>
           <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto">
-            Masukkan data akademik dua semester terakhir untuk memprediksi tingkat risiko DO.
+            {t.page.predict.subhead}
           </p>
         </div>
 
@@ -88,7 +90,9 @@ function PredictPage() {
             <div className="w-full flex flex-row items-start gap-3">
               {/* age */}
               <div className="flex-1">
-                <label className="w-full block font-semibold mb-1">Usia</label>
+                <label className="w-full block font-semibold mb-1">
+                  {t.page.predict.input.age}
+                </label>
                 <input
                   type="number"
                   min={17}
@@ -136,7 +140,7 @@ function PredictPage() {
                   onChange={e => update("isScholarship", e.target.checked)}
                   className="cursor-pointer"
                 />
-                Penerima Beasiswa
+                {t.page.predict.input.scholarship}
               </label>
 
               <label className="flex items-center gap-2">
@@ -146,7 +150,7 @@ function PredictPage() {
                   onChange={e => update("isDebtor", e.target.checked)}
                   className="cursor-pointer"
                 />
-                Tanggungan UKT
+                {t.page.predict.input.debtor}
               </label>
             </div>
 
@@ -155,7 +159,7 @@ function PredictPage() {
               onClick={handlePredict}
               className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-2 rounded transition"
             >
-              Prediksi!
+              {t.header.predict}
             </button>
           </article>
 
@@ -163,7 +167,9 @@ function PredictPage() {
           <section className="w-full lg:w-[45%] xl:w-[40%] flex flex-col gap-3">
             {/* result card */}
             <article className="w-full bg-white shadow-md rounded-lg p-6">
-              <p className="uppercase font-semibold tracking-wide">Hasil Prediksi</p>
+              <p className="uppercase font-semibold tracking-wide">
+                {t.page.predict.result.head}
+              </p>
 
               {result ? (
                 <div className="mt-4 space-y-2">

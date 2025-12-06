@@ -1,3 +1,5 @@
+import { useLang } from "../context/LangContext"
+
 type Form = {
   age: number;
   semester: number;
@@ -18,12 +20,14 @@ type SemesterCardProps = {
 }
 
 function SemesterCard({ semester, form, updateFunc }: SemesterCardProps) {
+  const { t } = useLang()
+
   return (
     <div className="border rounded-lg p-4 space-y-4 bg-gray-50">
       <h2 className="font-semibold text-lg">Semester {semester}</h2>
 
       <div>
-        <label className="block mb-1">Jumlah Mata Kuliah</label>
+        <label className="block mb-1">{t.page.predict.semcard.curUnits}</label>
         <input
           type="number"
           min={0}
@@ -35,7 +39,7 @@ function SemesterCard({ semester, form, updateFunc }: SemesterCardProps) {
       </div>
 
       <div>
-        <label className="block mb-1">Lulus</label>
+        <label className="block mb-1">{t.page.predict.semcard.curApproved}</label>
         <input
           type="number"
           min={0}
@@ -47,7 +51,7 @@ function SemesterCard({ semester, form, updateFunc }: SemesterCardProps) {
       </div>
 
       <div>
-        <label className="block mb-1">IP Semester</label>
+        <label className="block mb-1">{t.page.predict.semcard.semGpa}</label>
         <input
           type="number"
           min={0}

@@ -59,8 +59,21 @@ export const TEXT = {
         }
       },
       predict: {
-        head: "Prediksi Status Semester Depan",
-        subhead: "*Gratis, anonim, dan tidak akan mengambil data kamu (atau judge nilaimu).",
+        head: "Prediksi Resiko Drop Out",
+        subhead: "Masukkan data akademik dua semester terakhir untuk memprediksi tingkat risiko DO.",
+        input: {
+          age: "Umur",
+          scholarship: "Penerima Beasiswa",
+          debtor: "Tanggungan UKT"
+        },
+        semcard: {
+          curUnits: "Jumlah mata kuliah",
+          curApproved: "Jumlah mata kuliah lulus",
+          semGpa: "IP semester"
+        },
+        result: {
+          head: "Hasil Prediksi",
+        }
       }
     },
   },
@@ -123,8 +136,21 @@ export const TEXT = {
         },
       },
       predict: {
-        head: "Predict Next Semester's Status",
-        subhead: "*Free, anonymous, and won't take your data (or roast your GPA).",
+        head: "Predict Drop Out's Risk",
+        subhead: "Enter two last semesters academic value to predict the drop out risk.",
+        input: {
+          age: "Age",
+          scholarship: "Scholarship",
+          debtor: "Debtor"
+        },
+        semcard: {
+          curUnits: "Total curricular units",
+          curApproved: "Approved curricular units",
+          semGpa: "Semester grade"
+        },
+        result: {
+          head: "Predict Result",
+        }
       }
     },
   },

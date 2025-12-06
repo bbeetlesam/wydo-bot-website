@@ -223,26 +223,29 @@ function PredictPage() {
             </button>
           </article>
 
-          {warning && (
-            <div className="mt-3 p-3 bg-red-100 text-red-700 rounded border border-red-300">
-              {warning}
-            </div>
-          )}
+          {/* warning + result card */}
+          <section className="w-full lg:w-[45%] xl:w-[40%] flex flex-col gap-3">
+            {/* result card */}
+            <article className="w-full bg-white shadow-md rounded-lg p-6">
+              <p className="uppercase font-semibold tracking-wide">Hasil Prediksi</p>
 
-          {/* hasil */}
-          <article className="w-full lg:w-[45%] xl:w-[40%] bg-white shadow-md rounded-lg p-6">
-            <p className="uppercase font-semibold tracking-wide">Hasil Prediksi</p>
+              {result ? (
+                <div className="mt-4 space-y-2">
+                  <p><b>Probabilitas:</b> {result.prob ?? "-"}</p>
+                  <p><b>Kategori:</b> {result.kategori ?? "-"}</p>
+                </div>
+              ) : (
+                <p className="text-slate-500 mt-4">Belum ada hasil.</p>
+              )}
+            </article>
 
-            {result ? (
-              <div className="mt-4 space-y-2">
-                <p><b>Probabilitas:</b> {result.prob ?? "-"}</p>
-                <p><b>Kategori:</b> {result.kategori ?? "-"}</p>
-              </div>
-            ) : (
-              <p className="text-slate-500 mt-4">Belum ada hasil.</p>
+            {/* warning card */}
+            {warning && (
+              <article className="w-full p-3 bg-red-100 text-red-700 rounded border border-red-300">
+                {warning}
+              </article>
             )}
-          </article>
-
+          </section>
         </section>
       </section>
     </main>

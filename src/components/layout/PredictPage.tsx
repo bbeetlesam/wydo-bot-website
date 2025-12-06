@@ -1,17 +1,5 @@
 import { useState } from "react";
-
-type Form = {
-  age: number;
-  semester: number;
-  isScholarship: boolean;
-  isDebtor: boolean;
-  totalSem1: number;
-  passedSem1: number;
-  gpaSem1: number;
-  totalSem2: number;
-  passedSem2: number;
-  gpaSem2: number;
-};
+import { type Form, SemesterCard } from "../PredictPageComps";
 
 const initForm: Form = {
   age: 17,
@@ -126,88 +114,18 @@ function PredictPage() {
             </div>
 
             {/* 1st semester */}
-            <div className="border rounded-lg p-4 space-y-4 bg-gray-50">
-              <h2 className="font-semibold text-lg">Semester 1</h2>
-
-              <div>
-                <label className="block mb-1">Jumlah Mata Kuliah</label>
-                <input
-                  type="number"
-                  min={0}
-                  max={8}
-                  value={form.totalSem1}
-                  onChange={e => update("totalSem1", Number(e.target.value))}
-                  className="w-full border rounded px-3 py-2 bg-white"
-                />
-              </div>
-
-              <div>
-                <label className="block mb-1">Lulus</label>
-                <input
-                  type="number"
-                  min={0}
-                  max={form.totalSem1}
-                  value={form.passedSem1}
-                  onChange={e => update("passedSem1", Number(e.target.value))}
-                  className="w-full border rounded px-3 py-2 bg-white"
-                />
-              </div>
-
-              <div>
-                <label className="block mb-1">IP Semester</label>
-                <input
-                  type="number"
-                  min={0}
-                  max={4}
-                  step={0.1}
-                  value={form.gpaSem1}
-                  onChange={e => update("gpaSem1", Number(e.target.value))}
-                  className="w-full border rounded px-3 py-2 bg-white"
-                />
-              </div>
-            </div>
+            <SemesterCard
+              semester={1}
+              form={form}
+              updateFunc={update}
+            />
 
             {/* 2nd semester */}
-            <div className="border rounded-lg p-4 space-y-4 bg-gray-50">
-              <h2 className="font-semibold text-lg">Semester 2</h2>
-
-              <div>
-                <label className="block mb-1">Jumlah Mata Kuliah</label>
-                <input
-                  type="number"
-                  min={0}
-                  max={8}
-                  value={form.totalSem2}
-                  onChange={e => update("totalSem2", Number(e.target.value))}
-                  className="w-full border rounded px-3 py-2 bg-white"
-                />
-              </div>
-
-              <div>
-                <label className="block mb-1">Lulus</label>
-                <input
-                  type="number"
-                  min={0}
-                  max={form.totalSem2}
-                  value={form.passedSem2}
-                  onChange={e => update("passedSem2", Number(e.target.value))}
-                  className="w-full border rounded px-3 py-2 bg-white"
-                />
-              </div>
-
-              <div>
-                <label className="block mb-1">IP Semester</label>
-                <input
-                  type="number"
-                  min={0}
-                  max={4}
-                  step={0.1}
-                  value={form.gpaSem2}
-                  onChange={e => update("gpaSem2", Number(e.target.value))}
-                  className="w-full border rounded px-3 py-2 bg-white"
-                />
-              </div>
-            </div>
+            <SemesterCard
+              semester={2}
+              form={form}
+              updateFunc={update}
+            />
 
             {/* scholarship + debtor */}
             <div className="flex items-center gap-6">
@@ -249,7 +167,7 @@ function PredictPage() {
 
               {result ? (
                 <div className="mt-4 space-y-2">
-                  <p><b>Probabilitas:</b> {result.prob ?? "-"}</p>
+                  <p><b>Probabilitas:</b> {result.prob ? result.prob * 100 + "%" : "-"}</p>
                   <p><b>Kategori:</b> {result.kategori ?? "-"}</p>
                 </div>
               ) : (

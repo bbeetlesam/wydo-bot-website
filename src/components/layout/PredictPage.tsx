@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { type Form, SemesterCard } from "../PredictPageComps";
+import { type Form, type PredictResult, SemesterCard, ResultCard } from "../PredictPageComps";
 import { useLang } from "../../context/LangContext";
 
 const initForm: Form = {
@@ -20,7 +20,7 @@ const API_URL = "https://mustofa.pythonanywhere.com/api/predict";
 
 function PredictPage() {
   const [form, setForm] = useState<Form>(initForm);
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<PredictResult | null>(null);
   const [warning, setWarning] = useState<string | null>(null);
   const { t } = useLang()
 
@@ -59,7 +59,7 @@ function PredictPage() {
         return;
       }
 
-      const data = await res.json();
+      const data: PredictResult = await res.json();
       setWarning(null);
       setResult(data);
 
@@ -166,20 +166,7 @@ function PredictPage() {
           {/* warning + result card */}
           <section className="w-full lg:w-[45%] xl:w-[40%] flex flex-col gap-3">
             {/* result card */}
-            <article className="w-full bg-white shadow-md rounded-lg p-6">
-              <p className="uppercase font-semibold tracking-wide">
-                {t.page.predict.result.head}
-              </p>
-
-              {result ? (
-                <div className="mt-4 space-y-2">
-                  <p><b>Probabilitas:</b> {result.prob ? result.prob * 100 + "%" : "-"}</p>
-                  <p><b>Kategori:</b> {result.kategori ?? "-"}</p>
-                </div>
-              ) : (
-                <p className="text-slate-500 mt-4">Belum ada hasil.</p>
-              )}
-            </article>
+            <ResultCard result={result} t={t} />
 
             {/* warning card */}
             {warning && (

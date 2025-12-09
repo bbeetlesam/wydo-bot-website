@@ -26,8 +26,8 @@ function PredictPage() {
   const resultRef = useRef<HTMLDivElement | null>(null);
   const { t } = useLang()
 
-  const update = (key: keyof Form, value: any) => {
-    setForm(prev => ({ ...prev, [key]: value }));
+  const update = <K extends keyof Form>(field: K, value: Form[K]) => {
+    setForm(prev => ({ ...prev, [field]: value }));
   };
 
   const handlePredict = async (e: React.FormEvent) => {

@@ -27,6 +27,9 @@ type ResultCardProps = {
 }
 
 function SemesterCard({ semester, form, updateFunc }: SemesterCardProps) {
+  const totalKey: keyof Form = semester === 1 ? "totalSem1" : "totalSem2";
+  const passedKey: keyof Form = semester === 1 ? "passedSem1" : "passedSem2";
+  const gpaKey: keyof Form = semester === 1 ? "gpaSem1" : "gpaSem2";
   const { t } = useLang()
 
   return (
@@ -39,8 +42,8 @@ function SemesterCard({ semester, form, updateFunc }: SemesterCardProps) {
           type="number"
           min={0}
           max={8}
-          value={form.totalSem1}
-          onChange={e => updateFunc("totalSem1", Number(e.target.value))}
+          value={form[totalKey] as number}
+          onChange={e => updateFunc(totalKey, Number(e.target.value))}
           className="w-full border rounded px-3 py-2 bg-white"
         />
       </div>
@@ -50,9 +53,9 @@ function SemesterCard({ semester, form, updateFunc }: SemesterCardProps) {
         <input
           type="number"
           min={0}
-          max={form.totalSem1}
-          value={form.passedSem1}
-          onChange={e => updateFunc("passedSem1", Number(e.target.value))}
+          max={form[totalKey] as number}
+          value={form[passedKey] as number}
+          onChange={e => updateFunc(passedKey, Number(e.target.value))}
           className="w-full border rounded px-3 py-2 bg-white"
         />
       </div>
@@ -64,8 +67,8 @@ function SemesterCard({ semester, form, updateFunc }: SemesterCardProps) {
           min={0}
           max={4}
           step={0.1}
-          value={form.gpaSem1}
-          onChange={e => updateFunc("gpaSem1", Number(e.target.value))}
+          value={form[gpaKey] as number}
+          onChange={e => updateFunc(gpaKey, Number(e.target.value))}
           className="w-full border rounded px-3 py-2 bg-white"
         />
       </div>

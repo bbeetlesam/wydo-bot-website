@@ -77,24 +77,24 @@ function ResultCard({ result, t, isLoading }: ResultCardProps) {
   function getRiskInfo(prob: number) {
     if (prob < 0.35) {
       return {
-        label: "Risiko rendah",
-        note: "Secara model kamu cukup aman. Tetap jaga ritme kuliah.",
+        label: t.page.predict.result.label.low,
+        note: t.page.predict.result.note.low,
         badgeClasses: "bg-emerald-50 text-emerald-800",
         cardClasses: "bg-emerald-50/40 border-emerald-200",
         barClasses: "bg-emerald-500",
       };
     } else if (prob < 0.65) {
       return {
-        label: "Risiko sedang",
-        note: "Kamu di area rawan. Nilai semester berikutnya bakal sangat berpengaruh.",
+        label: t.page.predict.result.label.moderate,
+        note: t.page.predict.result.note.moderate,
         badgeClasses: "bg-amber-50 text-amber-800",
         cardClasses: "bg-amber-50/40 border-amber-200",
         barClasses: "bg-amber-500",
       };
     } else {
       return {
-        label: "Risiko tinggi",
-        note: "Model melihat risiko DO tinggi. Perlu evaluasi serius dan cari bantuan akademik.",
+        label: t.page.predict.result.label.high,
+        note: t.page.predict.result.note.high,
         badgeClasses: "bg-rose-50 text-rose-800",
         cardClasses: "bg-rose-50/40 border-rose-200",
         barClasses: "bg-rose-500",
@@ -113,7 +113,7 @@ function ResultCard({ result, t, isLoading }: ResultCardProps) {
             className="inline-block h-4 w-4 rounded-full border-2 border-cyan-500 border-t-transparent animate-spin"
             aria-hidden="true"
           />
-          <span>Model sedang memprediksi...</span>
+          <span>{t.page.predict.result.processing}</span>
         </div>
       </article>
     );
@@ -154,7 +154,7 @@ function ResultCard({ result, t, isLoading }: ResultCardProps) {
                     {percent}%
                   </div>
                   <div className="text-[0.7rem] text-slate-500">
-                    probabilitas risiko DO
+                    {t.page.predict.result.riskDO}
                   </div>
                 </div>
               </div>
@@ -179,7 +179,7 @@ function ResultCard({ result, t, isLoading }: ResultCardProps) {
       ) : (
         <div className="rounded-xl border border-slate-200 bg-white px-5 py-4 sm:px-6 sm:py-5">
           <p className="text-sm text-slate-500">
-            Belum ada hasil. Isi data di formulir untuk melihat prediksi.
+            {t.page.predict.result.empty}
           </p>
         </div>
       )}

@@ -74,6 +74,19 @@ export const TEXT = {
         },
         result: {
           head: "Hasil Prediksi",
+          riskDO: "probabilitas risiko DO",
+          processing: "Model sedang memprediksi...",
+          empty: "Belum ada hasil. Isi data di formulir untuk melihat prediksi.",
+          label: {
+            low: "Risiko rendah",
+            moderate: "Risiko sedang",
+            high: "Risiko tinggi",
+          },
+          note: {
+            low: "Secara model kamu cukup aman. Tetap jaga ritme kuliah.",
+            moderate: "Kamu di area rawan. Nilai semester berikutnya bakal cukup berpengaruh.",
+            high: "Model melihat risiko DO tinggi. Perlu evaluasi serius dan cari bantuan akademik.",
+          }
         }
       }
     },
@@ -152,6 +165,19 @@ export const TEXT = {
         },
         result: {
           head: "Predict Result",
+          riskDO: "probability risk of DO",
+          processing: "The model is predicting...",
+          empty: "No result yet. Fill the data on the form to get the prediction result.",
+          label: {
+            low: "Low risk",
+            moderate: "Moderate risk",
+            high: "High risk!",
+          },
+          note: {
+            low: "You're doing fine! Don't be too carried on, though.",
+            moderate: "Be careful, your line between passing and dropping is blurring.",
+            high: "Oh shit, you're cooked, I mean roasted. Get some immediate help...",
+          }
         }
       }
     },
